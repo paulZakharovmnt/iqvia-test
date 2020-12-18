@@ -7,6 +7,8 @@ const CitySearchPanel = ({
   citiesById,
   getCityWeatherClick,
   deleteAllCities,
+  deleteCityFromList,
+  updateCityWeather,
 }) => {
   const [inputCitySearch, setInputCitySearch] = useState("");
 
@@ -25,7 +27,13 @@ const CitySearchPanel = ({
       </div>
       <div className="list-of-cities">
         {citiesAllIds.map((city) => (
-          <City key={city} cityId={city} citiesById={citiesById} />
+          <City
+            key={city}
+            cityId={city}
+            citiesById={citiesById}
+            updateCityWeather={updateCityWeather}
+            deleteCityFromList={deleteCityFromList}
+          />
         ))}
 
         {/* <div>City 2</div>

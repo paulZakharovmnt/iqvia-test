@@ -1,7 +1,12 @@
 import React from "react";
 import "./City.css";
 
-const City = ({ citiesById, cityId }) => {
+const City = ({
+  citiesById,
+  cityId,
+  deleteCityFromList,
+  updateCityWeather,
+}) => {
   const cityInfo = citiesById[cityId];
 
   return (
@@ -13,8 +18,8 @@ const City = ({ citiesById, cityId }) => {
         <p>Icon?</p>
       </div>
       <div className="city-control-icons">
-        <div>Update</div>
-        <div>Delete</div>
+        <div onClick={() => updateCityWeather(cityId)}>Update</div>
+        <div onClick={() => deleteCityFromList(cityId)}>Delete</div>
       </div>
     </div>
   );

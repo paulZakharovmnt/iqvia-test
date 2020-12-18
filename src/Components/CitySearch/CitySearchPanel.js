@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import City from "./City";
 import "./CitySearchPanel.css";
 
-const CitySearchPanel = ({ getCityWeatherClick }) => {
+const CitySearchPanel = ({
+  citiesAllIds,
+  citiesById,
+  getCityWeatherClick,
+  deleteAllCities,
+}) => {
   const [inputCitySearch, setInputCitySearch] = useState("");
 
   const submitCitySearchInput = () => {
@@ -19,11 +24,16 @@ const CitySearchPanel = ({ getCityWeatherClick }) => {
         <div onClick={submitCitySearchInput}> plus icon</div>
       </div>
       <div className="list-of-cities">
-        <City />
-        <div>City 2</div>
-        <div>City 3</div>
+        {citiesAllIds.map((city) => (
+          <City key={city} cityId={city} citiesById={citiesById} />
+        ))}
+
+        {/* <div>City 2</div>
+        <div>City 3</div> */}
       </div>
-      <div className="clear-btn-container">Clear BTN</div>
+      <div className="clear-btn-container">
+        <p onClick={deleteAllCities}>Clear</p>
+      </div>
     </div>
   );
 };

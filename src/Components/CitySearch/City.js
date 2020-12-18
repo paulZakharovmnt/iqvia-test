@@ -1,11 +1,13 @@
 import React from "react";
 import "./City.css";
 
-const City = () => {
+const City = ({ citiesById, cityId }) => {
+  const cityInfo = citiesById[cityId];
+
   return (
     <div className="city">
       <div className="city-data">
-        <h3>City Name</h3>
+        <h3>{cityInfo.name}</h3>
         <p>- 12 C</p>
         <p>Cloudy</p>
         <p>Icon?</p>

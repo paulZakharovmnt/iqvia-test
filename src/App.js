@@ -33,8 +33,14 @@ function App() {
     setCitiesById(citiesByIdCopy);
   };
 
-  const updateCityWeather = (cityId) => {
-    console.log(cityId);
+  const updateCityWeather = async (cityId) => {
+    await fetch(`${weatherApi}?q=${cityId}&appid=${apiKey}`)
+      .then((resp) => resp.json())
+      .then((result) => {
+        const citiesByIdCopy = { ...citiesById };
+        citiesByIdCopy[result.name] = result;
+        setCitiesById(citiesByIdCopy);
+      });
   };
 
   const deleteAllCities = () => {

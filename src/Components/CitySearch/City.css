@@ -1,0 +1,27 @@
+.city {
+  background-color: darkgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.city-data {
+  background-color: darkgreen;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+}
+
+.city-control-icons {
+  background-color: darkorange;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 20%;
+}

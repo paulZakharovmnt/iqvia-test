@@ -20,10 +20,28 @@ function App() {
         setCitiesAllIds([...citiesAllIds, result.name]);
       });
   };
+  const deleteCityFromList = (cityId) => {
+    const citiesAllIdsCopy = citiesAllIds.filter((city) => city !== cityId);
+    setCitiesAllIds(citiesAllIdsCopy);
+
+    const citiesByIdCopy = Object.keys(citiesById).reduce((obj, key) => {
+      if (key !== cityId) {
+        obj[key] = citiesById[key];
+      }
+      return obj;
+    }, {});
+    setCitiesById(citiesByIdCopy);
+  };
+
+  const updateCityWeather = (cityId) => {
+    console.log(cityId);
+  };
+
   const deleteAllCities = () => {
     setCitiesAllIds([]);
     setCitiesById(null);
   };
+
   return (
     <div className="App">
       <CitySearchPanel
@@ -31,6 +49,8 @@ function App() {
         citiesById={citiesById}
         getCityWeatherClick={getCityWeatherClick}
         deleteAllCities={deleteAllCities}
+        deleteCityFromList={deleteCityFromList}
+        updateCityWeather={updateCityWeather}
       />
       <CityWeatherPanel />
     </div>

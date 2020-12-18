@@ -10,15 +10,19 @@ function App() {
   const [citiesAllIds, setCitiesAllIds] = useState([]);
   const [citiesById, setCitiesById] = useState(null);
 
-  const getCityWeatherClick = (inputCity) => {
-    fetch(`${weatherApi}?q=${inputCity}&appid=${apiKey}`)
+  const getCityWeatherClick = async (inputCity) => {
+    await fetch(`${weatherApi}?q=${inputCity}&appid=${apiKey}`)
       .then((resp) => resp.json())
       .then((result) => {
-        setCitiesAllIds([...citiesAllIds, result.name]);
         const citiesByIdCopy = { ...citiesById };
         citiesByIdCopy[result.name] = result;
-        // console.log(citiesByIdCopy);
+        setCitiesById(citiesByIdCopy);
+        setCitiesAllIds([...citiesAllIds, result.name]);
       });
+  };
+  const deleteAllCities = () => {
+    setCitiesAllIds([]);
+    setCitiesById(null);
   };
   return (
     <div className="App">
@@ -26,6 +30,7 @@ function App() {
         citiesAllIds={citiesAllIds}
         citiesById={citiesById}
         getCityWeatherClick={getCityWeatherClick}
+        deleteAllCities={deleteAllCities}
       />
       <CityWeatherPanel />
     </div>

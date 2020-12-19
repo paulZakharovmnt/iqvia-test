@@ -9,6 +9,7 @@ const CitySearchPanel = ({
   deleteAllCities,
   deleteCityFromList,
   updateCityWeather,
+  handleShowDetailedCityForecast,
 }) => {
   const [inputCitySearch, setInputCitySearch] = useState("");
 
@@ -23,7 +24,7 @@ const CitySearchPanel = ({
           value={inputCitySearch}
           onChange={(event) => setInputCitySearch(event.target.value)}
         />
-        <div onClick={submitCitySearchInput}> plus icon</div>
+        <i className="fas fa-plus" onClick={submitCitySearchInput} />
       </div>
       <div className="list-of-cities">
         {citiesAllIds.map((city) => (
@@ -33,6 +34,7 @@ const CitySearchPanel = ({
             citiesById={citiesById}
             updateCityWeather={updateCityWeather}
             deleteCityFromList={deleteCityFromList}
+            handleShowDetailedCityForecast={handleShowDetailedCityForecast}
           />
         ))}
 

@@ -6,20 +6,30 @@ const City = ({
   cityId,
   deleteCityFromList,
   updateCityWeather,
+  handleShowDetailedCityForecast,
 }) => {
   const cityInfo = citiesById[cityId];
 
   return (
     <div className="city">
-      <div className="city-data">
+      <div
+        onClick={() => handleShowDetailedCityForecast(cityInfo)}
+        className="city-data"
+      >
         <h3>{cityInfo.name}</h3>
         <p>- 12 C</p>
         <p>Cloudy</p>
         <p>Icon?</p>
       </div>
       <div className="city-control-icons">
-        <div onClick={() => updateCityWeather(cityId)}>Update</div>
-        <div onClick={() => deleteCityFromList(cityId)}>Delete</div>
+        <i
+          className="fas fa-sync-alt"
+          onClick={() => updateCityWeather(cityId)}
+        />
+        <i
+          className="fas fa-times"
+          onClick={() => deleteCityFromList(cityId)}
+        />
       </div>
     </div>
   );

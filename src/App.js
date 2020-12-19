@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import fetchCityWeather from "./core/fetchCityWeather";
+import fetchDetailedCityForecast from "./core/fetchDetailedCityForecast";
 import CitySearchPanel from "./components/CitySearch/CitySearchPanel";
 import CityWeatherPanel from "./components/CityWeather/CityWeatherPanel";
 
@@ -9,16 +11,15 @@ function App() {
 
   const [citiesAllIds, setCitiesAllIds] = useState([]);
   const [citiesById, setCitiesById] = useState(null);
+  const [displayCityForecast, setDisplayCityForecast] = useState(null);
 
   const getCityWeatherClick = async (inputCity) => {
-    await fetch(`${weatherApi}?q=${inputCity}&appid=${apiKey}`)
-      .then((resp) => resp.json())
-      .then((result) => {
-        const citiesByIdCopy = { ...citiesById };
-        citiesByIdCopy[result.name] = result;
-        setCitiesById(citiesByIdCopy);
-        setCitiesAllIds([...citiesAllIds, result.name]);
-      });
+    const cityWeather = await fetchCityWeather(inputCity);
+
+    const citiesByIdCopy = { ...citiesById };
+    citiesByIdCopy[cityWeather.name] = cityWeather;
+    setCitiesById(citiesByIdCopy);
+    setCitiesAllIds([...citiesAllIds, cityWeather.name]);
   };
   const deleteCityFromList = (cityId) => {
     const citiesAllIdsCopy = citiesAllIds.filter((city) => city !== cityId);
@@ -33,14 +34,20 @@ function App() {
     setCitiesById(citiesByIdCopy);
   };
 
-  const updateCityWeather = async (cityId) => {
-    await fetch(`${weatherApi}?q=${cityId}&appid=${apiKey}`)
+  const handleShowDetailedCityForecast = async (cityInfo) => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${cityInfo.coord.lat}&lon=${cityInfo.coord.lon}&exclude={part}&appid=c51223c219d6aec8cb8c5210449bd859`
+    )
       .then((resp) => resp.json())
-      .then((result) => {
-        const citiesByIdCopy = { ...citiesById };
-        citiesByIdCopy[result.name] = result;
-        setCitiesById(citiesByIdCopy);
-      });
+      .then((result) => console.log(result));
+    // const detailedWeatherForecast = fetchDetailedCityForecast(cityName);
+  };
+
+  const updateCityWeather = async (cityId) => {
+    const cityWeather = await fetchCityWeather(cityId);
+    const citiesByIdCopy = { ...citiesById };
+    citiesByIdCopy[cityWeather.name] = cityWeather;
+    setCitiesById(citiesByIdCopy);
   };
 
   const deleteAllCities = () => {
@@ -57,8 +64,9 @@ function App() {
         deleteAllCities={deleteAllCities}
         deleteCityFromList={deleteCityFromList}
         updateCityWeather={updateCityWeather}
+        handleShowDetailedCityForecast={handleShowDetailedCityForecast}
       />
-      <CityWeatherPanel />
+      <CityWeatherPanel displayCityForecast={displayCityForecast} />
     </div>
   );
 }

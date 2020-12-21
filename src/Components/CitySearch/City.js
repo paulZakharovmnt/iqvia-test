@@ -1,4 +1,5 @@
 import React from "react";
+import weatherIconMap from "../../core/weatherIconMap";
 import "./City.css";
 
 const City = ({
@@ -9,6 +10,7 @@ const City = ({
   handleShowDetailedCityForecast,
 }) => {
   const cityInfo = citiesById[cityId];
+  const cityWeather = cityInfo.weather[0];
 
   return (
     <div className="city">
@@ -17,9 +19,9 @@ const City = ({
         className="city-data"
       >
         <h3>{cityInfo.name}</h3>
-        <p>- 12 C</p>
-        <p>Cloudy</p>
-        <p>Icon?</p>
+        <p>{Math.floor(cityInfo.main.temp)} C</p>
+        <p>{cityWeather.description}</p>
+        <img src={weatherIconMap[cityWeather.icon]} alt="" />
       </div>
       <div className="city-control-icons">
         <i

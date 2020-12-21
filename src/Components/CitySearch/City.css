@@ -14,6 +14,22 @@
   justify-content: flex-start;
   align-items: center;
   width: 80%;
+  padding-left: 10px;
+}
+
+.city-data > h3 {
+  background-color: rosybrown;
+  width: 35%;
+}
+
+.city-data > p {
+  background-color: salmon;
+  width: 20%;
+}
+
+.city-data > img {
+  background-color: seagreen;
+  margin-left: 10px;
 }
 
 .city-control-icons {

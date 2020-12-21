@@ -1,43 +1,66 @@
 .city {
-  background-color: darkgray;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid black;
 }
 
 .city-data {
-  background-color: darkgreen;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 80%;
-  padding-left: 10px;
 }
 
-.city-data > h3 {
-  background-color: rosybrown;
+.city-data > h2 {
   width: 35%;
+  text-align: left;
 }
 
 .city-data > p {
-  background-color: salmon;
   width: 20%;
 }
 
 .city-data > img {
-  background-color: seagreen;
   margin-left: 10px;
 }
 
 .city-control-icons {
-  background-color: darkorange;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   height: 100%;
   width: 20%;
+}
+
+.delete {
+  color: rgb(182, 4, 4);
+  transition: color 0.1s ease-in;
+}
+
+.delete:hover {
+  color: red;
+}
+
+.refresh {
+  color: rgb(4, 4, 189);
+}
+
+.refresh:hover {
+  color: rgb(52, 116, 255);
+  animation-name: spin-refresh;
+  animation-duration: 1s;
+}
+
+@keyframes spin-refresh {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

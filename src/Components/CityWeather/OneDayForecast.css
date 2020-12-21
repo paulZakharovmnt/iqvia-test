@@ -1,0 +1,9 @@
+.daily-forecast-container {
+  background-color: red;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}

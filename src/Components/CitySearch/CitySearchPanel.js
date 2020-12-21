@@ -24,9 +24,13 @@ const CitySearchPanel = ({
           value={inputCitySearch}
           onChange={(event) => setInputCitySearch(event.target.value)}
         />
-        <i className="fas fa-plus" onClick={submitCitySearchInput} />
+        <i
+          className="btn add-city fas fa-plus"
+          onClick={submitCitySearchInput}
+        />
       </div>
       <div className="list-of-cities">
+        <p>Recent Locations</p>
         {citiesAllIds.map((city) => (
           <City
             key={city}
@@ -42,7 +46,9 @@ const CitySearchPanel = ({
         <div>City 3</div> */}
       </div>
       <div className="clear-btn-container">
-        <p onClick={deleteAllCities}>Clear</p>
+        <div className="clear-btn" onClick={deleteAllCities}>
+          Clear
+        </div>
       </div>
     </div>
   );

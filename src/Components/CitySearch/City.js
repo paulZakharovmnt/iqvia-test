@@ -18,18 +18,18 @@ const City = ({
         onClick={() => handleShowDetailedCityForecast(cityInfo)}
         className="city-data"
       >
-        <h3>{cityInfo.name}</h3>
+        <h2>{cityInfo.name}</h2>
         <p>{Math.floor(cityInfo.main.temp)} C</p>
         <p>{cityWeather.description}</p>
         <img src={weatherIconMap[cityWeather.icon]} alt="" />
       </div>
       <div className="city-control-icons">
         <i
-          className="fas fa-sync-alt"
+          className="btn refresh fas fa-sync-alt"
           onClick={() => updateCityWeather(cityId)}
         />
         <i
-          className="fas fa-times"
+          className="btn delete fas fa-times"
           onClick={() => deleteCityFromList(cityId)}
         />
       </div>

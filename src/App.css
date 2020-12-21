@@ -8,3 +8,9 @@
   width: 100%;
   height: 100vh;
 }
+
+.city-weather-panel {
+  background-color: aquamarine;
+  width: 60%;
+  height: 70%;
+}

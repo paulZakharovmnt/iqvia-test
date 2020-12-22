@@ -5,9 +5,7 @@ const fetchCityWeather = async (inputCity) => {
     `${weatherApi}weather?q=${inputCity}&units=metric&appid=${apiKey}`
   )
     .then((resp) => resp.json())
-    .then((result) => {
-      return result;
-    });
+    .then((result) => result);
 };
 
 export default fetchCityWeather;

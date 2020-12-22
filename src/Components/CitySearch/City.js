@@ -19,7 +19,7 @@ const City = ({
         className="city-data"
       >
         <h2>{cityInfo.name}</h2>
-        <p>{Math.floor(cityInfo.main.temp)} C</p>
+        <p>{Math.floor(cityInfo.main.temp)} °C</p>
         <p>{cityWeather.description}</p>
         <img src={weatherIconMap[cityWeather.icon]} alt="" />
       </div>

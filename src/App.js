@@ -22,7 +22,7 @@ function App() {
   };
 
   const addCityToTheState = (cityWeather) => {
-    if (citiesAllIds.length === 3) {
+    if (citiesAllIds.length === 8) {
       deleteCityFromList(citiesAllIds[citiesAllIds.length - 1]);
       if (
         displayCityForecast &&
@@ -67,6 +67,10 @@ function App() {
     setCitiesById(citiesByIdCopy);
   };
 
+  const closeErrorModal = () => {
+    setErrorApiMessage(null);
+  };
+
   const deleteAllCities = () => {
     setCitiesAllIds([]);
     setCitiesById(null);
@@ -78,6 +82,8 @@ function App() {
       <CitySearchPanel
         citiesAllIds={citiesAllIds}
         citiesById={citiesById}
+        errorApiMessage={errorApiMessage}
+        closeErrorModal={closeErrorModal}
         getCityWeatherClick={getCityWeatherClick}
         deleteAllCities={deleteAllCities}
         deleteCityFromList={deleteCityFromList}

@@ -1,5 +1,8 @@
 .daily-forecast-container {
-  background-color: red;
+  /* background-color: red; */
+  background-color: rgba(128, 128, 128, 0.322);
+  box-shadow: 4px 8px 10px 2px black;
+  border-radius: 10px;
   width: 140px;
   height: 140px;
   display: flex;

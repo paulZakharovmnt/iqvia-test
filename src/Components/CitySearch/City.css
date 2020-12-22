@@ -16,12 +16,14 @@
 }
 
 .city-data > h2 {
+  margin: 0;
   width: 35%;
   text-align: left;
 }
 
 .city-data > p {
   width: 20%;
+  margin: 0;
 }
 
 .city-data > img {

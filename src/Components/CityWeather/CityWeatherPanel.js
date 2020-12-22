@@ -18,7 +18,7 @@ const CityWeatherPanel = ({
       <div className="city-weather-panel-header">
         <h1>{displayCityForecast.name}</h1>
         <i
-          className="fas fa-sync-alt"
+          className="btn refresh fas fa-sync-alt"
           onClick={() => handleShowDetailedCityForecast(displayCityForecast)}
         />
       </div>
@@ -33,7 +33,7 @@ const CityWeatherPanel = ({
             Wind: {currentCityWeather.wind_speed}ms,{" "}
             {currentCityWeather.wind_deg} deg
           </p>
-          <p>{currentCityWeather.pressure}</p>
+          <p>Pressure: {currentCityWeather.pressure}</p>
         </div>
       </div>
       <div className="weather-forecast-container">

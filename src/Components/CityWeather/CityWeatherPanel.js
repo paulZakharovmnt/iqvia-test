@@ -10,7 +10,6 @@ const CityWeatherPanel = ({
   const currentCityWeather = displayCityForecast.current;
   const weatherIcon = currentCityWeather.weather[0].icon;
   const cityTemp = Math.floor(currentCityWeather.temp);
-
   const fiveDaysforecast = displayCityForecast.daily.slice(1, 6);
 
   return (
@@ -27,7 +26,7 @@ const CityWeatherPanel = ({
           <img src={weatherIconMap[weatherIcon]} alt="" />
         </div>
         <div className="current-weather-info">
-          <p>{cityTemp} C</p>
+          <p>{cityTemp} °C</p>
           <p>{currentCityWeather.weather[0].main}</p>
           <p>
             Wind: {currentCityWeather.wind_speed}ms,{" "}

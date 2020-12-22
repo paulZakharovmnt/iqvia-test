@@ -25,7 +25,7 @@ const weatherIconMap = {
   "11n": thunder,
   "13d": snowy_6,
   "13n": snowy_6,
-  // There is no mist icons in pack
+  // There is no mist icons in pack. Used just clounds
   "50d": cloudy,
   "50n": cloudy,
 };

@@ -10,16 +10,28 @@ function App() {
   const [citiesAllIds, setCitiesAllIds] = useState([]);
   const [citiesById, setCitiesById] = useState(null);
   const [displayCityForecast, setDisplayCityForecast] = useState(null);
+  const [errorApiMessage, setErrorApiMessage] = useState(null);
 
   const getCityWeatherClick = async (inputCity) => {
     const cityWeather = await fetchCityWeather(inputCity);
+    if (cityWeather.cod === "404") {
+      setErrorApiMessage(cityWeather.message);
+      return;
+    }
     addCityToTheState(cityWeather);
   };
 
   const addCityToTheState = (cityWeather) => {
-    if (citiesAllIds.length === 8) {
+    if (citiesAllIds.length === 3) {
       deleteCityFromList(citiesAllIds[citiesAllIds.length - 1]);
+      if (
+        displayCityForecast &&
+        citiesAllIds[citiesAllIds.length - 1] === displayCityForecast.name
+      ) {
+        setDisplayCityForecast(null);
+      }
     }
+
     setCitiesById((citiesById) => ({
       ...citiesById,
       [cityWeather.name]: cityWeather,
@@ -38,7 +50,7 @@ function App() {
     );
     setCitiesById(updatedCityWeatherList);
 
-    if (cityId === displayCityForecast.name) {
+    if (displayCityForecast && displayCityForecast.name === cityId) {
       setDisplayCityForecast(null);
     }
   };

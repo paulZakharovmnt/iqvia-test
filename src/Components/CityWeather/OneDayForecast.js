@@ -14,7 +14,8 @@ const OneDayForecast = ({ dayForecast }) => {
   );
   return (
     <div className="daily-forecast-container">
-      {humanDateFormat}
+      <div className="day-and-date">{humanDateFormat}</div>
+
       <img src={weatherIconMap[weatherApiIcon]} alt="" />
       <p>{temp} °C</p>
     </div>

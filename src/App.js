@@ -2,17 +2,27 @@ import { useState } from "react";
 import "./App.css";
 import fetchCityWeather from "./core/fetchCityWeather";
 import fetchDetailedCityForecast from "./core/fetchDetailedCityForecast";
-import deleteCityWeatherFromList from "./core/deleteCityWeatherFromList";
 import CitySearchPanel from "./components/CitySearch/CitySearchPanel";
 import CityWeatherPanel from "./components/CityWeather/CityWeatherPanel";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  addCityIdToList,
+  deleteCity,
+  updateCityWeatherToState,
+  deleteAllCitiesFromState,
+} from "./redux/actions/actions";
 
 function App() {
-  const [citiesAllIds, setCitiesAllIds] = useState([]);
-  const [citiesById, setCitiesById] = useState(null);
-  const [displayCityForecast, setDisplayCityForecast] = useState(null);
+  const [detailedCityForecast, setDetailedCityForecast] = useState(null);
   const [errorApiMessage, setErrorApiMessage] = useState(null);
 
-  const getCityWeatherClick = async (inputCity) => {
+  const citiesAllIds = useSelector((state) => state.citiesAllIds);
+  const citiesById = useSelector((state) => state.citiesById);
+
+  const dispatch = useDispatch();
+
+  const handleFetchCityWeatherClick = async (inputCity) => {
     const cityWeather = await fetchCityWeather(inputCity);
     if (cityWeather.cod === "404") {
       setErrorApiMessage(cityWeather.message);
@@ -22,49 +32,36 @@ function App() {
   };
 
   const addCityToTheState = (cityWeather) => {
-    if (citiesAllIds.length === 8) {
-      deleteCityFromList(citiesAllIds[citiesAllIds.length - 1]);
+    if (citiesAllIds.length === 3) {
+      const lastCityInList = citiesAllIds[citiesAllIds.length - 1];
+      handleDeleteCityFromListClick(lastCityInList);
+
       if (
-        displayCityForecast &&
-        citiesAllIds[citiesAllIds.length - 1] === displayCityForecast.name
+        detailedCityForecast &&
+        lastCityInList === detailedCityForecast.name
       ) {
-        setDisplayCityForecast(null);
+        setDetailedCityForecast(null);
       }
     }
 
-    setCitiesById((citiesById) => ({
-      ...citiesById,
-      [cityWeather.name]: cityWeather,
-    }));
-    setCitiesAllIds((citiesAllIds) => [cityWeather.name, ...citiesAllIds]);
+    dispatch(addCityIdToList(cityWeather));
   };
 
-  const deleteCityFromList = (cityId) => {
-    setCitiesAllIds((citiesAllIds) =>
-      citiesAllIds.filter((city) => city !== cityId)
-    );
-
-    const updatedCityWeatherList = deleteCityWeatherFromList(
-      citiesById,
-      cityId
-    );
-    setCitiesById(updatedCityWeatherList);
-
-    if (displayCityForecast && displayCityForecast.name === cityId) {
-      setDisplayCityForecast(null);
+  const handleDeleteCityFromListClick = (cityId) => {
+    dispatch(deleteCity(cityId));
+    if (detailedCityForecast && detailedCityForecast.name === cityId) {
+      setDetailedCityForecast(null);
     }
   };
 
-  const handleShowDetailedCityForecast = async (cityInfo) => {
+  const handleFetchDetailedCityForecast = async (cityInfo) => {
     const cityForecast = await fetchDetailedCityForecast(cityInfo);
-    setDisplayCityForecast(cityForecast);
+    setDetailedCityForecast(cityForecast);
   };
 
-  const updateCityWeather = async (cityId) => {
+  const handleUpdateCityWeatherClick = async (cityId) => {
     const cityWeather = await fetchCityWeather(cityId);
-    const citiesByIdCopy = { ...citiesById };
-    citiesByIdCopy[cityWeather.name] = cityWeather;
-    setCitiesById(citiesByIdCopy);
+    dispatch(updateCityWeatherToState(cityWeather));
   };
 
   const closeErrorModal = () => {
@@ -72,9 +69,8 @@ function App() {
   };
 
   const deleteAllCities = () => {
-    setCitiesAllIds([]);
-    setCitiesById(null);
-    setDisplayCityForecast(null);
+    dispatch(deleteAllCitiesFromState());
+    setDetailedCityForecast(null);
   };
 
   return (
@@ -84,17 +80,17 @@ function App() {
         citiesById={citiesById}
         errorApiMessage={errorApiMessage}
         closeErrorModal={closeErrorModal}
-        getCityWeatherClick={getCityWeatherClick}
         deleteAllCities={deleteAllCities}
-        deleteCityFromList={deleteCityFromList}
-        updateCityWeather={updateCityWeather}
-        handleShowDetailedCityForecast={handleShowDetailedCityForecast}
+        handleFetchCityWeatherClick={handleFetchCityWeatherClick}
+        handleDeleteCityFromListClick={handleDeleteCityFromListClick}
+        handleUpdateCityWeatherClick={handleUpdateCityWeatherClick}
+        handleFetchDetailedCityForecast={handleFetchDetailedCityForecast}
       />
       <div className="city-weather-panel">
-        {displayCityForecast ? (
+        {detailedCityForecast ? (
           <CityWeatherPanel
-            displayCityForecast={displayCityForecast}
-            handleShowDetailedCityForecast={handleShowDetailedCityForecast}
+            detailedCityForecast={detailedCityForecast}
+            handleFetchDetailedCityForecast={handleFetchDetailedCityForecast}
           />
         ) : null}
       </div>

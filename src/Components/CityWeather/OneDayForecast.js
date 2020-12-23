@@ -12,7 +12,6 @@ const OneDayForecast = ({ dayForecast }) => {
       day: "numeric",
     }
   );
-
   return (
     <div className="daily-forecast-container">
       {humanDateFormat}

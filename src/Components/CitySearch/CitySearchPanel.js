@@ -8,16 +8,16 @@ const CitySearchPanel = ({
   citiesById,
   errorApiMessage,
   closeErrorModal,
-  getCityWeatherClick,
   deleteAllCities,
-  deleteCityFromList,
-  updateCityWeather,
-  handleShowDetailedCityForecast,
+  handleFetchCityWeatherClick,
+  handleDeleteCityFromListClick,
+  handleUpdateCityWeatherClick,
+  handleFetchDetailedCityForecast,
 }) => {
   const [inputCitySearch, setInputCitySearch] = useState("");
 
   const submitCitySearchInput = () => {
-    getCityWeatherClick(inputCitySearch);
+    handleFetchCityWeatherClick(inputCitySearch);
     setInputCitySearch("");
   };
   return (
@@ -45,14 +45,11 @@ const CitySearchPanel = ({
             key={city}
             cityId={city}
             citiesById={citiesById}
-            updateCityWeather={updateCityWeather}
-            deleteCityFromList={deleteCityFromList}
-            handleShowDetailedCityForecast={handleShowDetailedCityForecast}
+            handleUpdateCityWeatherClick={handleUpdateCityWeatherClick}
+            handleDeleteCityFromListClick={handleDeleteCityFromListClick}
+            handleFetchDetailedCityForecast={handleFetchDetailedCityForecast}
           />
         ))}
-
-        {/* <div>City 2</div>
-        <div>City 3</div> */}
       </div>
       <div className="clear-btn-container">
         <div className="clear-btn" onClick={deleteAllCities}>

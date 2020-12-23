@@ -5,32 +5,33 @@ import "./City.css";
 const City = ({
   citiesById,
   cityId,
-  deleteCityFromList,
-  updateCityWeather,
-  handleShowDetailedCityForecast,
+  handleDeleteCityFromListClick,
+  handleUpdateCityWeatherClick,
+  handleFetchDetailedCityForecast,
 }) => {
   const cityInfo = citiesById[cityId];
   const cityWeather = cityInfo.weather[0];
+  const temp = Math.floor(cityInfo.main.temp);
 
   return (
     <div className="city">
       <div
-        onClick={() => handleShowDetailedCityForecast(cityInfo)}
+        onClick={() => handleFetchDetailedCityForecast(cityInfo)}
         className="city-data"
       >
         <h2>{cityInfo.name}</h2>
-        <p>{Math.floor(cityInfo.main.temp)} °C</p>
+        <p>{temp} °C</p>
         <p>{cityWeather.description}</p>
         <img src={weatherIconMap[cityWeather.icon]} alt="" />
       </div>
       <div className="city-control-icons">
         <i
           className="btn refresh fas fa-sync-alt"
-          onClick={() => updateCityWeather(cityId)}
+          onClick={() => handleUpdateCityWeatherClick(cityId)}
         />
         <i
           className="btn delete fas fa-times"
-          onClick={() => deleteCityFromList(cityId)}
+          onClick={() => handleDeleteCityFromListClick(cityId)}
         />
       </div>
     </div>

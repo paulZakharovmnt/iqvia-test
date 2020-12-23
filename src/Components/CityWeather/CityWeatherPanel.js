@@ -4,21 +4,21 @@ import OneDayForecast from "./OneDayForecast";
 import weatherIconMap from "../../core/weatherIconMap";
 
 const CityWeatherPanel = ({
-  displayCityForecast,
-  handleShowDetailedCityForecast,
+  detailedCityForecast,
+  handleFetchDetailedCityForecast,
 }) => {
-  const currentCityWeather = displayCityForecast.current;
+  const currentCityWeather = detailedCityForecast.current;
   const weatherIcon = currentCityWeather.weather[0].icon;
   const cityTemp = Math.floor(currentCityWeather.temp);
-  const fiveDaysforecast = displayCityForecast.daily.slice(1, 6);
+  const fiveDaysforecast = detailedCityForecast.daily.slice(1, 6);
 
   return (
     <div className="city-weather-box">
       <div className="city-weather-panel-header">
-        <h1>{displayCityForecast.name}</h1>
+        <h1>{detailedCityForecast.name}</h1>
         <i
           className="btn refresh fas fa-sync-alt"
-          onClick={() => handleShowDetailedCityForecast(displayCityForecast)}
+          onClick={() => handleFetchDetailedCityForecast(detailedCityForecast)}
         />
       </div>
       <div className="current-weather-container">

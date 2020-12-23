@@ -32,7 +32,7 @@ function App() {
   };
 
   const addCityToTheState = (cityWeather) => {
-    if (citiesAllIds.length === 3) {
+    if (citiesAllIds.length === 8) {
       const lastCityInList = citiesAllIds[citiesAllIds.length - 1];
       handleDeleteCityFromListClick(lastCityInList);
 
